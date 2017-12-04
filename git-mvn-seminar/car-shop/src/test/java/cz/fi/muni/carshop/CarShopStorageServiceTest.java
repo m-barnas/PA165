@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Map;
 
+import cz.fi.muni.carshop.exceptions.RequestedCarNotFoundException;
 import org.junit.Test;
 
 import org.junit.rules.ExpectedException;
@@ -63,6 +64,14 @@ public class CarShopStorageServiceTest {
 		assertThat(service.getCheaperCarsOfSameTypeAndYear(new Car(Color.BLACK, CarTypes.AUDI, 2016, 900000)),
 				hasSize(3));
 
+	}
+
+	@Test
+	public void testSellCarWithCarNull() throws RequestedCarNotFoundException {
+		thrown.reportMissingExceptionWithMessage("We expect exception on" +
+				"not found car").expect(IllegalArgumentException.class);
+
+		service.sellCar(null);
 	}
 
 }

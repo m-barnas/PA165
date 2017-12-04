@@ -31,6 +31,9 @@ public class CarShopStorageServiceImpl implements CarShopStorageService {
 
 	@Override
 	public void sellCar(Car car) throws RequestedCarNotFoundException {
+		if (car == null) {
+			throw new IllegalArgumentException("car not be null.");
+		}
 		Map<CarTypes, List<Car>> allCars = CarShopStorage.getInstancce().getCars();
 		if (allCars.containsValue(car)) {
 			allCars.remove(car.getType(), car);
